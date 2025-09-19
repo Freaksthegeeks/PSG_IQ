@@ -162,12 +162,13 @@ class SimpleConfer {
         }
 
         // Handle remote stream
-        this.peerConnection.ontrack = (event) => {
-            console.log('📹 Received remote stream');
-            this.remoteStream = event.streams;
-            document.getElementById('remoteVideo').srcObject = this.remoteStream;
-            this.showStatus('Call connected!', 'success');
-        };
+       this.peerConnection.ontrack = event => {
+  console.log("Received remote stream");
+  this.remoteStream = event.streams[0];
+  document.getElementById("remoteVideo").srcObject = this.remoteStream;
+  this.showStatus("Call connected!", "success");
+};
+
 
         // Handle ICE candidates
         this.peerConnection.onicecandidate = (event) => {
