@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleConfer - Network Adaptive Video Calls</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎥</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎥 SimpleConfer</h1>
+            <p>Network-Adaptive Video Conferencing</p>
+        </header>
+
+        <!-- Network Status Display (From your handwritten notes!) -->
+        <div id="networkStatus" class="network-status">
+            <div class="status-indicator">
+                <span id="qualityIcon" class="status-icon">🔄</span>
+                <span id="qualityText" class="status-text">Checking connection...</span>
+            </div>
+            <div id="networkDetails" class="network-details">
+                <span id="packetLoss">Packet Loss: --</span>
+                <span id="rtt">Latency: --</span>
+            </div>
+        </div>
+
+        <!-- Video Container -->
+        <div class="video-container">
+            <div class="video-wrapper">
+                <h3>You</h3>
+                <video id="localVideo" autoplay muted playsinline></video>
+                <div id="localVideoOverlay" class="video-overlay hidden">
+                    🎵 Audio Only
+                </div>
+            </div>
+            <div class="video-wrapper">
+                <h3>Remote Participant</h3>
+                <video id="remoteVideo" autoplay playsinline></video>
+                <div id="remoteVideoOverlay" class="video-overlay hidden">
+                    🎵 Audio Only
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls (Including your Low Data Button!) -->
+        <div class="controls">
+            <button id="startCall" class="btn btn-primary">📞 Start Call</button>
+            <button id="endCall" class="btn btn-danger">📞 End Call</button>
+            <button id="lowDataMode" class="btn btn-warning">📱 Low Data Mode</button>
+            <button id="toggleAudio" class="btn btn-secondary">🎤 Mute</button>
+            <button id="toggleVideo" class="btn btn-secondary">📹 Stop Video</button>
+        </div>
+
+        <!-- Room Management -->
+        <div class="room-section">
+            <label for="roomInput">Room ID:</label>
+            <input type="text" id="roomInput" value="hackathon-demo" placeholder="Enter room name">
+            <label for="usernameInput">Your Name:</label>
+            <input type="text" id="usernameInput" value="Participant" placeholder="Enter your name">
+        </div>
+
+        <!-- Status Messages -->
+        <div id="statusMessages" class="status-messages"></div>
+
+        <!-- Network Adaptation Log (For demo purposes) -->
+        <div class="debug-section">
+            <h3>Network Adaptation Log</h3>
+            <div id="networkLog" class="network-log"></div>
+        </div>
+    </div>
+
+    <div>
+    <h3>Live Transcription</h3>
+    <pre id="liveTranscript" style="height: 150px; background: #f0f0f0; padding: 10px; overflow-y: scroll;"></pre>
+    <button onclick="startTranscription()">Start Transcription</button>
+    <button onclick="stopTranscription()">Stop Transcription</button>
+</div>
+
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename='js/network-monitor.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
